@@ -24,17 +24,40 @@
 
 このリポジトリでは以下を前提にしてください。
 
-- Next.js
-- TypeScript
-- App Router
+- Go
+- chi
+- templ または html/template
+- htmx
 - Tailwind CSS
-- PWA対応
-- TanStack Query
-- 必要に応じて Zod
-- 必要に応じて React Hook Form
+- PostgreSQL
+
+インフラ前提は以下です。
+
+- AWS App Runner または ECS Fargate
+- Amazon RDS for PostgreSQL
+- Amazon SES
+- EventBridge Scheduler
 
 技術選定は勝手に変更しないでください。
-別ライブラリの導入が必要な場合は、既存構成との整合性を最優先にしてください。
+特に、React / Next.js / Vue などのSPAフレームワークを前提に実装しないでください。
+このリポジトリは、Goを中心としたサーバーサイドレンダリング構成を前提とします。
+
+### 実装方針
+- 画面はサーバーサイドレンダリングを基本にする
+- フロントエンドのJavaScriptは最小限にする
+- 動的な部分更新は htmx を用いる
+- CSSは Tailwind CSS を用いる
+- データ永続化は PostgreSQL を前提にする
+- 通知は Amazon SES を使ったメール通知を初期案とする
+- 定刻処理や通知トリガーは EventBridge Scheduler の利用を前提とする
+
+### 禁止事項
+- 技術スタックの無断変更
+- 不要なJavaScriptライブラリの追加
+- 状態管理ライブラリの追加
+- SPA化を前提にした設計への変更
+- CSSフレームワークの追加導入
+- PostgreSQL以外を前提にした本番構成への変更
 
 ---
 
