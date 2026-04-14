@@ -1,0 +1,81 @@
+{{ define "content" }}
+  <div class="space-y-8">
+    <section class="relative overflow-hidden rounded-[28px] bg-surface-container-lowest px-6 pb-7 pt-6 shadow-[0_20px_40px_rgba(0,74,198,0.05)]">
+      <div class="absolute -right-8 -top-8 text-[140px] leading-none text-accent/5">✓</div>
+      <div class="relative z-10">
+        <div class="flex items-center gap-3">
+          <div class="flex h-12 w-12 items-center justify-center rounded-full bg-status-available-soft text-status-available shadow-inner">
+            {{ iconSVG "check" "h-5 w-5" }}
+          </div>
+          <div>
+            <p class="text-[11px] font-bold uppercase tracking-[0.24em] text-outline">Availability</p>
+            <h1 class="mt-1 text-[31px] font-extrabold leading-tight">
+              {{ if gt (countByStatus .Machines "available") 0 }}
+                今すぐ使えます
+              {{ else }}
+                いまは空き待ちです
+              {{ end }}
+            </h1>
+          </div>
+        </div>
+        <p class="mt-4 text-sm font-medium leading-6 text-[#595c5e]">
+          {{ if gt (countByStatus .Machines "available") 0 }}
+            現在、洗濯機が{{ countByStatus .Machines "available" }}台空いています。待ち時間なしで利用できます。
+          {{ else }}
+            現在は空きがありません。使用中と回収待ちを確認して、空きが出たら利用開始してください。
+          {{ end }}
+        </p>
+        <div class="mt-7 flex gap-3">
+          {{ if firstAvailableMachineID .Machines }}
+            <a class="inline-flex items-center gap-2 rounded-full bg-primary-grad px-6 py-4 text-sm font-bold text-white shadow-[0_18px_36px_rgba(0,88,186,0.22)]" href="/machines/{{ firstAvailableMachineID .Machines }}">
+              <span>予約する</span>
+              <span class="text-lg leading-none">+</span>
+            </a>
+          {{ else }}
+            <a class="inline-flex items-center gap-2 rounded-full bg-primary-grad px-6 py-4 text-sm font-bold text-white shadow-[0_18px_36px_rgba(0,88,186,0.22)]" href="#machine-list">
+              <span>状況を見る</span>
+              <span class="text-lg leading-none">+</span>
+            </a>
+          {{ end }}
+        </div>
+      </div>
+    </section>
+
+    <section id="machine-list" class="space-y-4">
+      <div class="flex items-end justify-between gap-3">
+        <div>
+          <h2 class="text-[22px] font-bold">洗濯機一覧</h2>
+          <p class="mt-1 text-sm uppercase tracking-[0.18em] text-outline">Status First View</p>
+        </div>
+        <a class="rounded-full bg-surface-container-low px-4 py-2 text-sm font-bold text-ink" href="/">再読み込み</a>
+      </div>
+
+      {{ if .Machines }}
+        <div class="grid gap-4">
+          {{ range .Machines }}
+            {{ template "machine_card" . }}
+          {{ end }}
+        </div>
+      {{ else }}
+        <div class="rounded-[24px] bg-surface-container-low px-5 py-8 text-center">
+          <p class="font-bold">表示できる洗濯機がありません</p>
+          <p class="mt-2 text-sm text-outline">通信状況を確認して再読み込みしてください。</p>
+        </div>
+      {{ end }}
+
+      <p class="text-sm leading-6 text-outline">
+        通信に失敗した場合は再読み込みしてください。状態は色だけでなくラベルと文字でも確認できます。
+      </p>
+    </section>
+
+    {{ if firstAvailableMachineID .Machines }}
+      <a href="/machines/{{ firstAvailableMachineID .Machines }}" class="fixed bottom-[104px] right-6 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-accent text-white shadow-[0_12px_30px_rgba(0,88,186,0.25)]">
+        {{ iconSVG "plus" "h-6 w-6" }}
+      </a>
+    {{ end }}
+  </div>
+{{ end }}
+
+{{ define "home_page" }}
+  {{ template "layout" . }}
+{{ end }}

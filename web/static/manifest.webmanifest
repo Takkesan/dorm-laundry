@@ -1,0 +1,17 @@
+{
+  "name": "寮ランドリー",
+  "short_name": "寮ランドリー",
+  "description": "共同洗濯機の空き状況確認と利用登録を行うPWA",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f9fbff",
+  "theme_color": "#f9fbff",
+  "icons": [
+    {
+      "src": "/static/icons/washer.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

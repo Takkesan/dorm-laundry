@@ -1,0 +1,39 @@
+{{ define "machine_card" }}
+  <a href="/machines/{{ .ID }}" class="block rounded-[24px] {{ if eq .Status "offline" }}bg-surface-container-low opacity-60{{ else }}bg-surface-container-lowest{{ end }} p-5 transition-transform active:scale-[0.98]">
+    <article class="flex items-center justify-between gap-4">
+      <div class="flex items-center gap-4">
+        <div class="flex h-16 w-16 items-center justify-center rounded-[20px] {{ machineCardToneClass .Status }}">
+          {{ if eq .Status "running" }}
+            {{ iconSVG "timer" "h-7 w-7" }}
+          {{ else if eq .Status "awaiting_pickup" }}
+            {{ iconSVG "basket" "h-7 w-7" }}
+          {{ else if eq .Status "offline" }}
+            {{ iconSVG "wrench" "h-7 w-7" }}
+          {{ else }}
+            {{ iconSVG "washer" "h-7 w-7" }}
+          {{ end }}
+        </div>
+        <div>
+          <p class="text-[11px] font-bold uppercase tracking-[0.24em] text-outline">Washer</p>
+          <h3 class="mt-1 text-[26px] font-bold leading-none">{{ .Name }}</h3>
+          <p class="mt-1 text-xs text-outline">{{ .Location }}</p>
+        </div>
+      </div>
+
+      <div class="flex min-w-[88px] flex-col items-end text-right">
+        <span class="rounded-full px-4 py-1.5 text-[11px] font-bold tracking-[0.14em] {{ statusBadgeClass .Status }}">
+          {{ statusLabel .Status }}
+        </span>
+        {{ if eq .Status "running" }}
+          <p class="mt-2 font-headline text-[30px] font-extrabold leading-none tracking-[-0.04em] {{ machineMetricClass .Status }}">
+            {{ .RemainingMinutes }}<span class="ml-1 text-sm font-bold">min</span>
+          </p>
+        {{ else if eq .Status "awaiting_pickup" }}
+          <p class="mt-2 text-[10px] font-bold uppercase tracking-[0.16em] {{ machineMetricClass .Status }}">取り出し待ち</p>
+        {{ else if eq .Status "offline" }}
+          <p class="mt-2 text-[10px] font-bold uppercase tracking-[0.16em] text-outline">点検中</p>
+        {{ end }}
+      </div>
+    </article>
+  </a>
+{{ end }}

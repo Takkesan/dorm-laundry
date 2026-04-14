@@ -1,0 +1,72 @@
+{{ define "layout" }}
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f5f7f9">
+    <meta name="description" content="共同洗濯機の空き状況確認と利用登録を行うPWA">
+    <link rel="manifest" href="/static/manifest.webmanifest">
+    <link rel="icon" href="/static/icons/washer.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <title>{{ .Title }} | 寮ランドリー</title>
+  </head>
+  <body class="min-h-screen bg-surface-base text-ink antialiased">
+    <header class="fixed inset-x-0 top-0 z-50 bg-white/82 backdrop-blur-xl">
+      <div class="mx-auto flex w-full max-w-md items-center justify-between px-6 py-4">
+        <div class="flex items-center gap-2.5">
+          <span class="flex h-6 w-6 items-center justify-center text-accent">
+            {{ iconSVG "location" "h-4 w-4" }}
+          </span>
+          <span class="font-headline text-[15px] font-bold tracking-[-0.02em] text-ink">3階ランドリー</span>
+        </div>
+        <div class="flex h-9 w-9 items-center justify-center rounded-full bg-surface-container-high text-[11px] font-bold text-ink shadow-[0_2px_8px_rgba(44,47,49,0.08)]">
+          DL
+        </div>
+      </div>
+    </header>
+
+    <div class="mx-auto flex min-h-screen w-full max-w-md flex-col px-6 pb-32 pt-24">
+      <main class="flex-1">
+        {{ template "content" . }}
+      </main>
+    </div>
+
+    <nav class="fixed inset-x-0 bottom-0 z-50">
+      <div class="mx-auto flex w-full max-w-md items-center justify-around rounded-t-[32px] bg-white px-4 pb-8 pt-3 shadow-[0_-10px_40px_rgba(0,74,198,0.05)]">
+        <a href="/" class="flex min-w-[64px] flex-col items-center justify-center rounded-[20px] px-3 py-2 transition-all {{ if isCurrentPath .CurrentPath "/" }}bg-blue-50 text-accent{{ else }}text-outline{{ end }}">
+          {{ iconSVG "home" "mb-1 h-5 w-5" }}
+          <span class="text-[10px] font-bold uppercase tracking-[0.22em]">ホーム</span>
+        </a>
+        <a href="/sessions/current" class="flex min-w-[64px] flex-col items-center justify-center rounded-[20px] px-3 py-2 transition-all {{ if isCurrentPath .CurrentPath "/sessions/current" }}bg-blue-50 text-accent{{ else }}text-outline{{ end }}">
+          {{ iconSVG "timer" "mb-1 h-5 w-5" }}
+          <span class="text-[10px] font-bold uppercase tracking-[0.22em]">セッション</span>
+        </a>
+        <a href="/sessions/current#notification-settings" class="relative flex min-w-[64px] flex-col items-center justify-center rounded-[20px] px-3 py-2 text-outline transition-all">
+          {{ iconSVG "bell" "mb-1 h-5 w-5" }}
+          {{ if and .CurrentSession (not .NotificationPreference.Enabled) }}
+            <span data-nav-notification-dot class="absolute right-4 top-2 h-2 w-2 rounded-full bg-red-500"></span>
+          {{ end }}
+          <span class="text-[10px] font-bold uppercase tracking-[0.22em]">通知</span>
+        </a>
+        <a href="/" class="flex min-w-[64px] flex-col items-center justify-center rounded-[20px] px-3 py-2 text-outline transition-all">
+          {{ iconSVG "settings" "mb-1 h-5 w-5" }}
+          <span class="text-[10px] font-bold uppercase tracking-[0.22em]">設定</span>
+        </a>
+      </div>
+    </nav>
+
+    <script src="/static/js/htmx.min.js" defer></script>
+    <script>
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", function () {
+          navigator.serviceWorker.register("/static/sw.js");
+        });
+      }
+    </script>
+  </body>
+</html>
+{{ end }}

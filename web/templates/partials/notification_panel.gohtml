@@ -1,0 +1,45 @@
+{{ define "notification_panel" }}
+  <section id="notification-panel" class="rounded-[28px] bg-surface-container-lowest px-6 py-7 shadow-[0_20px_40px_rgba(0,74,198,0.05)]">
+    <div class="flex items-center gap-3">
+      <div class="flex h-12 w-12 items-center justify-center rounded-full bg-status-running-soft text-accent">
+        {{ iconSVG "bell" "h-5 w-5" }}
+      </div>
+      <div>
+        <h2 class="text-xl font-bold">通知設定</h2>
+        <p class="mt-1 text-[11px] font-bold uppercase tracking-[0.2em] text-outline">Optional Reminder</p>
+      </div>
+    </div>
+    <p class="mt-5 text-sm leading-6 text-outline">
+      利用開始後に通知を使うと、洗濯終了や空き状況に気づきやすくなります。初回表示で強制はしません。
+    </p>
+    <p class="mt-5 rounded-[22px] bg-surface-container-low px-4 py-4 text-sm text-ink">現在の状態: {{ notificationStateText .NotificationPreference }}</p>
+    <form
+      class="mt-5"
+      hx-post="/push-subscriptions"
+      hx-target="#notification-panel"
+      hx-swap="outerHTML"
+      hx-on::after-request="document.querySelector('[data-nav-notification-dot]')?.remove()"
+    >
+      <button
+        type="submit"
+        class="flex h-16 w-full items-center justify-center gap-3 rounded-[24px] bg-primary-grad px-5 text-sm font-bold text-white shadow-[0_10px_25px_rgba(0,74,198,0.15)] disabled:cursor-not-allowed disabled:bg-slate-300"
+        {{ if .NotificationPreference.Enabled }}disabled{{ end }}
+      >
+        {{ iconSVG "bell" "h-5 w-5" }}
+        {{ if .NotificationPreference.Enabled }}通知は有効です{{ else }}通知を有効にする{{ end }}
+      </button>
+    </form>
+    {{ if .FlashMessage }}
+      <p class="mt-4 rounded-[20px] bg-status-available-panel px-4 py-3 text-sm text-ink">{{ .FlashMessage }}</p>
+    {{ end }}
+    {{ if not .CurrentSession }}
+      <p class="mt-4 text-sm leading-6 text-outline">
+        いま利用中でなくても設定できます。次回以降の利用開始時に通知を有効な状態で使えます。
+      </p>
+    {{ else }}
+      <p class="mt-4 text-sm leading-6 text-outline">
+        利用中セッションがあるため、設定後はこの利用にも通知状態が反映されます。
+      </p>
+    {{ end }}
+  </section>
+{{ end }}

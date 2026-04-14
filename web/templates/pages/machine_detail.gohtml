@@ -1,0 +1,57 @@
+{{ define "content" }}
+  <div class="space-y-5">
+    <a class="inline-flex items-center gap-2 text-sm font-bold text-outline" href="/">
+      <span class="text-base leading-none">←</span>
+      一覧に戻る
+    </a>
+
+    <section class="rounded-[28px] bg-surface-container-lowest px-6 py-6 shadow-[0_20px_40px_rgba(0,74,198,0.05)]">
+      <div class="flex items-start justify-between gap-4">
+        <div class="flex items-center gap-4">
+          <div class="flex h-16 w-16 items-center justify-center rounded-[20px] {{ machineCardToneClass .Machine.Status }}">
+            {{ if eq .Machine.Status "running" }}
+              {{ iconSVG "timer" "h-7 w-7" }}
+            {{ else if eq .Machine.Status "awaiting_pickup" }}
+              {{ iconSVG "basket" "h-7 w-7" }}
+            {{ else if eq .Machine.Status "offline" }}
+              {{ iconSVG "wrench" "h-7 w-7" }}
+            {{ else }}
+              {{ iconSVG "washer" "h-7 w-7" }}
+            {{ end }}
+          </div>
+          <div>
+            <p class="text-[11px] font-bold uppercase tracking-[0.24em] text-outline">Machine Detail</p>
+            <h1 class="mt-1 text-[32px] font-bold leading-none">{{ .Machine.Name }}</h1>
+            <p class="mt-2 text-sm text-outline">{{ .Machine.Location }}</p>
+          </div>
+        </div>
+        <span class="rounded-full px-4 py-1.5 text-[11px] font-bold tracking-[0.14em] {{ statusBadgeClass .Machine.Status }}">
+          {{ statusLabel .Machine.Status }}
+        </span>
+      </div>
+
+      <p class="mt-5 text-sm leading-6 text-outline">{{ statusDescription .Machine.Status }}</p>
+
+      <dl class="mt-6 space-y-4 text-sm text-ink">
+        <div class="flex items-center justify-between gap-4 rounded-[20px] bg-surface-container-low px-4 py-4">
+          <dt>標準運転時間</dt>
+          <dd class="font-bold">{{ .Machine.CycleMinutes }}分</dd>
+        </div>
+        <div class="flex items-center justify-between gap-4 rounded-[20px] bg-surface-container-low px-4 py-4">
+          <dt>現在の目安</dt>
+          <dd class="max-w-[58%] text-right text-outline">{{ statusSummary .Machine }}</dd>
+        </div>
+        <div class="flex items-center justify-between gap-4 rounded-[20px] bg-surface-container-low px-4 py-4">
+          <dt>最終更新</dt>
+          <dd class="font-bold">{{ formatDateTime .Machine.UpdatedAt }}</dd>
+        </div>
+      </dl>
+    </section>
+
+    {{ template "machine_action_panel" . }}
+  </div>
+{{ end }}
+
+{{ define "machine_detail_page" }}
+  {{ template "layout" . }}
+{{ end }}

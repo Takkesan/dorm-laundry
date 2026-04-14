@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply min-h-screen bg-surface-base font-body text-ink;
+    background: #f5f7f9;
+    min-height: max(884px, 100dvh);
+  }
+
+  a {
+    @apply text-inherit no-underline;
+  }
+
+  button {
+    touch-action: manipulation;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-headline tracking-[-0.02em];
+  }
+}
+
+@layer utilities {
+  .glass-card {
+    background: rgba(255, 255, 255, 0.82);
+    backdrop-filter: blur(18px);
+  }
+
+  .soft-divider {
+    background: linear-gradient(90deg, rgba(171, 173, 175, 0), rgba(171, 173, 175, 0.32), rgba(171, 173, 175, 0));
+  }
+}

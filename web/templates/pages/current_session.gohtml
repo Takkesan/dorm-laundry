@@ -1,0 +1,18 @@
+{{ define "content" }}
+  <div class="space-y-8">
+    <section>
+      <h1 class="text-[31px] font-bold leading-tight">現在のセッション</h1>
+      <p class="mt-1 text-[11px] font-bold uppercase tracking-[0.24em] text-outline">Active Monitoring</p>
+    </section>
+
+    {{ template "current_session_panel" . }}
+
+    {{ if and (not .CurrentSession) (not .NotificationPreference.Enabled) }}
+      {{ template "notification_panel" . }}
+    {{ end }}
+  </div>
+{{ end }}
+
+{{ define "current_session_page" }}
+  {{ template "layout" . }}
+{{ end }}

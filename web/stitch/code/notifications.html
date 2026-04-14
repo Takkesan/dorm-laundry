@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+
+<html lang="ja"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary-container": "#00714d",
+                    "on-secondary": "#ffffff",
+                    "surface-container-lowest": "#ffffff",
+                    "error": "#ba1a1a",
+                    "background": "#f7f9fb",
+                    "on-secondary-fixed": "#002113",
+                    "on-surface-variant": "#434655",
+                    "primary-fixed-dim": "#b4c5ff",
+                    "on-tertiary-container": "#ffeedd",
+                    "on-error-container": "#93000a",
+                    "tertiary-container": "#996100",
+                    "on-background": "#191c1e",
+                    "on-tertiary-fixed": "#2a1700",
+                    "surface-tint": "#0053db",
+                    "primary-container": "#2563eb",
+                    "on-tertiary": "#ffffff",
+                    "on-tertiary-fixed-variant": "#653e00",
+                    "surface": "#f7f9fb",
+                    "tertiary-fixed-dim": "#ffb95f",
+                    "on-secondary-fixed-variant": "#005236",
+                    "tertiary": "#784b00",
+                    "primary": "#004ac6",
+                    "tertiary-fixed": "#ffddb8",
+                    "secondary-fixed": "#6ffbbe",
+                    "surface-container-highest": "#e0e3e5",
+                    "error-container": "#ffdad6",
+                    "outline-variant": "#c3c6d7",
+                    "secondary": "#006c49",
+                    "surface-container-low": "#f2f4f6",
+                    "surface-container-high": "#e6e8ea",
+                    "surface-container": "#eceef0",
+                    "inverse-surface": "#2d3133",
+                    "inverse-on-surface": "#eff1f3",
+                    "surface-dim": "#d8dadc",
+                    "inverse-primary": "#b4c5ff",
+                    "secondary-fixed-dim": "#4edea3",
+                    "on-error": "#ffffff",
+                    "outline": "#737686",
+                    "secondary-container": "#6cf8bb",
+                    "surface-bright": "#f7f9fb",
+                    "on-primary-fixed": "#00174b",
+                    "surface-variant": "#e0e3e5",
+                    "on-primary-container": "#eeefff",
+                    "primary-fixed": "#dbe1ff",
+                    "on-surface": "#191c1e",
+                    "on-primary": "#ffffff",
+                    "on-primary-fixed-variant": "#003ea8"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Plus Jakarta Sans"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; background-color: #f7f9fb; }
+        .font-headline { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface antialiased min-h-screen flex flex-col">
+<!-- Top Navigation Suppression: Onboarding/Permission focus -->
+<header class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-xl px-6 py-6 flex justify-end">
+<button class="text-outline hover:text-on-surface transition-colors p-2">
+<span class="material-symbols-outlined text-2xl">close</span>
+</button>
+</header>
+<main class="flex-grow flex flex-col items-center justify-center px-8 pt-20 pb-12">
+<!-- Status Hero: Ethereal Illustration -->
+<div class="relative w-full max-w-md aspect-square flex items-center justify-center mb-12">
+<!-- Background Decorative Elements -->
+<div class="absolute inset-0 bg-primary/5 rounded-full blur-3xl scale-75"></div>
+<!-- Minimal Illustration Container -->
+<div class="relative z-10 w-64 h-64 bg-surface-container-lowest rounded-xl shadow-[0px_20px_40px_rgba(0,74,198,0.06)] flex items-center justify-center overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-br from-white via-primary-fixed/20 to-white opacity-40"></div>
+<div class="flex flex-col items-center gap-6">
+<!-- Bell/Notification Icon with Editorial Scale -->
+<div class="relative">
+<span class="material-symbols-outlined text-[80px] text-primary" style="font-variation-settings: 'FILL' 1;">notifications_active</span>
+<!-- Floating Bubbles -->
+<div class="absolute -top-2 -right-2 w-6 h-6 bg-secondary-fixed rounded-full border-4 border-white"></div>
+</div>
+<!-- Decorative Machine Indicator -->
+<div class="flex gap-2 items-center px-4 py-2 bg-surface-container-low rounded-full">
+<span class="material-symbols-outlined text-sm text-on-secondary-fixed-variant">local_laundry_service</span>
+<span class="font-label text-[10px] font-bold tracking-widest text-on-secondary-fixed-variant uppercase">Machine #04</span>
+</div>
+</div>
+</div>
+<!-- Floating Toast Simulation for Context -->
+<div class="absolute -bottom-4 right-4 bg-white px-6 py-4 rounded-lg shadow-xl flex items-center gap-4 max-w-[240px]">
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-xl">timer</span>
+</div>
+<div class="flex flex-col">
+<p class="font-headline font-bold text-xs">洗濯完了</p>
+<p class="text-[10px] text-outline">まもなく終了します</p>
+</div>
+</div>
+</div>
+<!-- Content Hierarchy -->
+<div class="w-full max-w-sm text-center">
+<h1 class="font-headline font-bold text-2xl md:text-3xl tracking-tight text-on-surface mb-6 leading-tight">
+                洗濯の終了を<br/>見逃さない
+            </h1>
+<p class="text-on-surface-variant text-base leading-relaxed mb-12 px-2">
+                通知をオンにすると、洗濯が終わったときやすぐに空きが出たときにお知らせします。
+            </p>
+</div>
+<!-- Editorial CTAs -->
+<div class="w-full max-w-sm flex flex-col gap-4">
+<button class="w-full py-5 bg-gradient-to-br from-primary to-primary-container text-on-primary font-headline font-semibold text-lg rounded-xl shadow-[0px_20px_40px_rgba(0,74,198,0.15)] active:scale-95 transition-all">
+                通知を許可する
+            </button>
+<button class="w-full py-4 text-outline font-headline font-medium text-base hover:text-on-surface transition-colors active:scale-[0.98]">
+                後で
+            </button>
+</div>
+</main>
+<!-- Visual Benefit Cards: Asymmetric Mosaic -->
+<section class="w-full px-6 pb-20 max-w-lg mx-auto">
+<div class="grid grid-cols-2 gap-4">
+<div class="p-5 bg-surface-container-low rounded-lg flex flex-col gap-3">
+<span class="material-symbols-outlined text-primary">notifications_paused</span>
+<p class="font-headline font-bold text-sm">時間の有効活用</p>
+<p class="text-[11px] text-outline leading-normal">終わるまで待機室で待つ必要はありません。</p>
+</div>
+<div class="p-5 bg-surface-container-low rounded-lg flex flex-col gap-3 mt-4">
+<span class="material-symbols-outlined text-secondary">flash_on</span>
+<p class="font-headline font-bold text-sm">空き状況通知</p>
+<p class="text-[11px] text-outline leading-normal">希望の洗濯機が空いたらすぐにお知らせ。</p>
+</div>
+</div>
+</section>
+<!-- Bottom Nav Suppression: Explicitly omitted for focus on the permission task -->
+</body></html>

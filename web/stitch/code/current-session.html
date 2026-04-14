@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+
+<html lang="ja"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary-container": "#00714d",
+                    "on-secondary": "#ffffff",
+                    "surface-container-lowest": "#ffffff",
+                    "error": "#ba1a1a",
+                    "background": "#f7f9fb",
+                    "on-secondary-fixed": "#002113",
+                    "on-surface-variant": "#434655",
+                    "primary-fixed-dim": "#b4c5ff",
+                    "on-tertiary-container": "#ffeedd",
+                    "on-error-container": "#93000a",
+                    "tertiary-container": "#996100",
+                    "on-background": "#191c1e",
+                    "on-tertiary-fixed": "#2a1700",
+                    "surface-tint": "#0053db",
+                    "primary-container": "#2563eb",
+                    "on-tertiary": "#ffffff",
+                    "on-tertiary-fixed-variant": "#653e00",
+                    "surface": "#f7f9fb",
+                    "tertiary-fixed-dim": "#ffb95f",
+                    "on-secondary-fixed-variant": "#005236",
+                    "tertiary": "#784b00",
+                    "primary": "#004ac6",
+                    "tertiary-fixed": "#ffddb8",
+                    "secondary-fixed": "#6ffbbe",
+                    "surface-container-highest": "#e0e3e5",
+                    "error-container": "#ffdad6",
+                    "outline-variant": "#c3c6d7",
+                    "secondary": "#006c49",
+                    "surface-container-low": "#f2f4f6",
+                    "surface-container-high": "#e6e8ea",
+                    "surface-container": "#eceef0",
+                    "inverse-surface": "#2d3133",
+                    "inverse-on-surface": "#eff1f3",
+                    "surface-dim": "#d8dadc",
+                    "inverse-primary": "#b4c5ff",
+                    "secondary-fixed-dim": "#4edea3",
+                    "on-error": "#ffffff",
+                    "outline": "#737686",
+                    "secondary-container": "#6cf8bb",
+                    "surface-bright": "#f7f9fb",
+                    "on-primary-fixed": "#00174b",
+                    "surface-variant": "#e0e3e5",
+                    "on-primary-container": "#eeefff",
+                    "primary-fixed": "#dbe1ff",
+                    "on-surface": "#191c1e",
+                    "on-primary": "#ffffff",
+                    "on-primary-fixed-variant": "#003ea8"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Plus Jakarta Sans"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; background-color: #f7f9fb; }
+        .font-headline { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="text-on-surface min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl">
+<div class="flex justify-between items-center px-6 py-4 w-full max-w-screen-xl mx-auto">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-blue-600 dark:text-blue-400" data-icon="location_on">location_on</span>
+<span class="text-lg font-bold text-slate-900 dark:text-slate-50 font-headline tracking-tight">3階ランドリー</span>
+</div>
+<div class="w-10 h-10 rounded-full overflow-hidden bg-surface-container-high">
+<img alt="User Profile Avatar" class="w-full h-full object-cover" data-alt="professional male portrait headshot with clean background and natural lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD0GM2izKRCHm1szAWz4rSMDsdC1yQl25Rp9WhadC50n9O-HIf27LGAh5rnCkVgUGop0-O8_Ctrz-02OTgskg4-mx2rMPvkM1wyEmJI1659ed8_95f6mzU1PhMbVjy6oaghBr5457RsEJM3F6TFvBILCJjuvO5TYcL_7x7z8vSJKbcxNJzwuoAIPceB2NZSaeIvUMkWoF5gypKjfvu4Kjlx0KzLkvKfnvJXKcYKQi2qbqpzUbff7IhLhx0C1Ox7pJ-k_XlbxK3RxlY"/>
+</div>
+</div>
+</header>
+<main class="pt-24 px-6 max-w-md mx-auto">
+<!-- Page Title -->
+<div class="mb-8">
+<h1 class="text-2xl font-bold font-headline text-on-surface">現在のセッション</h1>
+<p class="text-on-surface-variant text-sm tracking-wide mt-1 uppercase font-label">ACTIVE MONITORING</p>
+</div>
+<!-- Hero Status Section: Circular Timer -->
+<section class="relative flex flex-col items-center justify-center py-12 mb-10 bg-surface-container-lowest rounded-lg shadow-[0px_20px_40px_rgba(0,74,198,0.05)] overflow-hidden">
+<!-- Background Accent -->
+<div class="absolute -top-24 -right-24 w-64 h-64 bg-primary/5 rounded-full blur-3xl"></div>
+<!-- Progress Circle -->
+<div class="relative w-64 h-64 flex items-center justify-center">
+<!-- SVG Circle Track -->
+<svg class="w-full h-full transform -rotate-90">
+<circle class="text-surface-container-high" cx="128" cy="128" fill="transparent" r="110" stroke="currentColor" stroke-width="12"></circle>
+<circle class="text-primary" cx="128" cy="128" fill="transparent" r="110" stroke="currentColor" stroke-dasharray="691" stroke-dashoffset="242" stroke-linecap="round" stroke-width="12"></circle>
+</svg>
+<!-- Inner Stats -->
+<div class="absolute flex flex-col items-center text-center">
+<span class="text-5xl font-extrabold font-headline text-primary tracking-tight">65%</span>
+<span class="text-on-surface-variant font-label text-[10px] tracking-[0.2em] mt-2 font-bold uppercase">PROGRESS</span>
+</div>
+</div>
+<!-- Machine Context -->
+<div class="mt-10 text-center">
+<div class="inline-flex items-center gap-2 bg-secondary-fixed text-on-secondary-fixed px-4 py-1.5 rounded-full mb-4">
+<span class="material-symbols-outlined text-[18px]" data-icon="local_laundry_service">local_laundry_service</span>
+<span class="text-xs font-bold font-headline">洗濯機 #02</span>
+</div>
+<div class="flex flex-col gap-1">
+<h2 class="text-4xl font-bold font-headline text-on-surface tracking-tight">残り 12分</h2>
+<p class="text-on-surface-variant text-sm font-medium">終了予定 14:45</p>
+</div>
+</div>
+</section>
+<!-- Dynamic Information Mosaic -->
+<div class="grid grid-cols-2 gap-4 mb-10">
+<div class="bg-surface-container-lowest p-6 rounded-lg flex flex-col gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="water_drop">water_drop</span>
+<div>
+<p class="text-[10px] font-bold text-on-surface-variant uppercase tracking-wider">Mode</p>
+<p class="text-sm font-bold font-headline text-on-surface">標準・お急ぎ</p>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-lg flex flex-col gap-2">
+<span class="material-symbols-outlined text-tertiary" data-icon="thermostat">thermostat</span>
+<div>
+<p class="text-[10px] font-bold text-on-surface-variant uppercase tracking-wider">Temp</p>
+<p class="text-sm font-bold font-headline text-on-surface">40°C 温水</p>
+</div>
+</div>
+</div>
+<!-- Action Buttons -->
+<div class="flex flex-col gap-4">
+<button class="w-full h-16 bg-gradient-to-br from-primary to-primary-container text-on-primary rounded-xl font-bold font-headline flex items-center justify-center gap-3 shadow-[0px_10px_25px_rgba(0,74,198,0.15)] active:scale-[0.98] transition-all">
+<span class="material-symbols-outlined" data-icon="notifications_active">notifications_active</span>
+                通知をオンにする
+            </button>
+<button class="w-full h-16 bg-surface-container-high text-on-surface rounded-xl font-bold font-headline flex items-center justify-center gap-3 active:scale-[0.98] transition-all">
+<span class="material-symbols-outlined" data-icon="check_circle">check_circle</span>
+                洗濯物を回収しました
+            </button>
+</div>
+<!-- Helpful Tips (Editorial Touch) -->
+<div class="mt-12 p-6 bg-tertiary-fixed text-on-tertiary-fixed rounded-lg flex gap-4 items-start">
+<span class="material-symbols-outlined mt-1" data-icon="info">info</span>
+<div>
+<p class="font-bold font-headline text-sm mb-1">共同利用のマナー</p>
+<p class="text-xs leading-relaxed opacity-80">洗濯が終わったら、次の人のために10分以内に回収をお願いします。</p>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 bg-white dark:bg-slate-950 rounded-t-[32px] shadow-[0px_-10px_40px_rgba(0,74,198,0.05)]">
+<div class="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pt-3 pb-8">
+<!-- Home -->
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-5 py-2 hover:text-blue-500 dark:hover:text-blue-300 transition-all duration-200 active:scale-95" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="home">home</span>
+<span class="font-['Inter'] text-[10px] font-bold tracking-widest uppercase">ホーム</span>
+</a>
+<!-- Session (Active) -->
+<a class="flex flex-col items-center justify-center bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-[20px] px-5 py-2 scale-98 transition-all duration-200" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="timer" style="font-variation-settings: 'FILL' 1;">timer</span>
+<span class="font-['Inter'] text-[10px] font-bold tracking-widest uppercase">セッション</span>
+</a>
+<!-- Notifications -->
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-5 py-2 hover:text-blue-500 dark:hover:text-blue-300 transition-all duration-200 active:scale-95" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="notifications">notifications</span>
+<span class="font-['Inter'] text-[10px] font-bold tracking-widest uppercase">通知</span>
+</a>
+<!-- Settings -->
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-5 py-2 hover:text-blue-500 dark:hover:text-blue-300 transition-all duration-200 active:scale-95" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="settings">settings</span>
+<span class="font-['Inter'] text-[10px] font-bold tracking-widest uppercase">設定</span>
+</a>
+</div>
+</nav>
+</body></html>

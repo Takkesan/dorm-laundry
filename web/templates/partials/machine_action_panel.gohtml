@@ -1,0 +1,48 @@
+{{ define "machine_action_panel" }}
+  <section id="machine-action-panel" class="rounded-[28px] bg-surface-container-lowest px-6 py-6 shadow-[0_20px_40px_rgba(0,74,198,0.05)]">
+    <div class="flex items-center gap-3">
+      <div class="flex h-12 w-12 items-center justify-center rounded-full bg-status-running-soft text-accent">
+        {{ iconSVG "washer" "h-5 w-5" }}
+      </div>
+      <div>
+        <h2 class="text-xl font-bold">利用開始</h2>
+        <p class="mt-1 text-[11px] font-bold uppercase tracking-[0.2em] text-outline">Start Session</p>
+      </div>
+    </div>
+    <p class="mt-5 text-sm leading-6 text-outline">{{ actionHint .Machine }}</p>
+    {{ if eq .Machine.Status "running" }}
+      <p class="mt-2 text-sm text-outline">終了見込み: {{ relativeMinutes .Machine.RemainingMinutes }}</p>
+    {{ end }}
+    <div class="mt-5 flex flex-col gap-3">
+      <form
+        hx-post="/sessions"
+        hx-target="#machine-action-panel"
+        hx-swap="outerHTML"
+      >
+        <input type="hidden" name="machine_id" value="{{ .Machine.ID }}">
+        <button
+          type="submit"
+          class="flex h-16 w-full items-center justify-center gap-3 rounded-[24px] bg-primary-grad px-5 text-sm font-bold text-white shadow-[0_10px_25px_rgba(0,74,198,0.15)] disabled:cursor-not-allowed disabled:bg-slate-300"
+          {{ if ne .Machine.Status "available" }}disabled{{ end }}
+        >
+          {{ iconSVG "plus" "h-5 w-5" }}
+          利用開始
+        </button>
+      </form>
+      <a class="flex h-16 items-center justify-center gap-3 rounded-[24px] bg-surface-container-high px-5 text-sm font-bold text-ink" href="/sessions/current">
+        {{ iconSVG "timer" "h-5 w-5" }}
+        自分の利用状況を見る
+      </a>
+    </div>
+    {{ if .ErrorMessage }}
+      <p class="mt-4 rounded-[20px] bg-red-50 px-4 py-3 text-sm text-rose-700">{{ .ErrorMessage }}</p>
+    {{ else if .FlashMessage }}
+      <div class="mt-4 rounded-[22px] bg-status-available-panel px-4 py-4 text-sm text-ink">
+        <p>{{ .FlashMessage }}</p>
+        <p class="mt-2 text-outline">通知は強制ではありません。必要なら利用中画面から有効にできます。</p>
+      </div>
+    {{ else if ne .Machine.Status "available" }}
+      <p class="mt-4 text-sm text-outline">いまはこの洗濯機を開始できません。空きの洗濯機を選ぶか、利用中画面を確認してください。</p>
+    {{ end }}
+  </section>
+{{ end }}
