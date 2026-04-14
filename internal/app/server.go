@@ -8,6 +8,8 @@ import (
 	"os"
 	"path/filepath"
 	"runtime"
+	"strings"
+	"sync"
 	"time"
 
 	"github.com/go-chi/chi/v5"
@@ -32,6 +34,18 @@ type pageData struct {
 	ErrorMessage           string
 	Now                    time.Time
 }
+
+var (
+	iconAssetPaths = map[string]string{
+		"washer":   "smart-wash-smart-clean-smart-cleaner-washing-machine-laundry-smart-loundry-svgrepo-com.svg",
+		"timer":    "timer-svgrepo-com.svg",
+		"basket":   "basket-svgrepo-com.svg",
+		"bell":     "bell-alt-svgrepo-com.svg",
+		"settings": "setting-5-svgrepo-com.svg",
+		"check":    "check-read-svgrepo-com.svg",
+	}
+	iconAssetCache sync.Map
+)
 
 func NewServer() (*Server, error) {
 	server := &Server{
@@ -199,6 +213,10 @@ func machineMetricClass(status laundry.MachineStatus) string {
 func iconSVG(name, class string) template.HTML {
 	class = template.HTMLEscapeString(class)
 
+	if svg, ok := fileBackedIconSVG(name, class); ok {
+		return template.HTML(svg)
+	}
+
 	var body string
 	switch name {
 	case "location":
@@ -236,6 +254,67 @@ func iconSVG(name, class string) template.HTML {
 		class,
 		body,
 	))
+}
+
+func fileBackedIconSVG(name, class string) (string, bool) {
+	filename, ok := iconAssetPaths[name]
+	if !ok {
+		return "", false
+	}
+
+	raw, ok := iconAssetCache.Load(filename)
+	if !ok {
+		bytes, err := os.ReadFile(filepath.Join(projectRoot(), "web", "static", "icons", filename))
+		if err != nil {
+			return "", false
+		}
+
+		raw = string(bytes)
+		iconAssetCache.Store(filename, raw)
+	}
+
+	svg := normalizeSVGMarkup(raw.(string), class)
+	if svg == "" {
+		return "", false
+	}
+
+	return svg, true
+}
+
+func normalizeSVGMarkup(raw, class string) string {
+	start := strings.Index(raw, "<svg")
+	if start == -1 {
+		return ""
+	}
+
+	openEnd := strings.Index(raw[start:], ">")
+	if openEnd == -1 {
+		return ""
+	}
+	openEnd += start
+
+	closeStart := strings.LastIndex(raw, "</svg>")
+	if closeStart == -1 || closeStart <= openEnd {
+		return ""
+	}
+
+	openTag := raw[start : openEnd+1]
+	openTag = strings.Replace(openTag, "<svg", fmt.Sprintf(`<svg aria-hidden="true" class="%s"`, class), 1)
+
+	replacer := strings.NewReplacer(
+		` width="800px"`, "",
+		` height="800px"`, "",
+		` fill="#000000"`, ` fill="currentColor"`,
+		` fill="#1C274C"`, ` fill="currentColor"`,
+		` stroke="#000000"`, ` stroke="currentColor"`,
+		` stroke="#323232"`, ` stroke="currentColor"`,
+		` stroke="#1C274C"`, ` stroke="currentColor"`,
+	)
+
+	openTag = replacer.Replace(openTag)
+	inner := replacer.Replace(raw[openEnd+1 : closeStart])
+
+	return openTag + inner + "</svg>"
 }
 
 func (s *Server) routes() chi.Router {
